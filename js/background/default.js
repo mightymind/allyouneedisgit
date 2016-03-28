@@ -6,6 +6,6 @@ chrome.alarms.onAlarm.addListener(function(alarm) {
 });
  
 chrome.alarms.create('git_commits', {
-	delayInMinutes: 0.2,
-	periodInMinutes: 1,
+	delayInMinutes: 0.1,
+	periodInMinutes: 2,
 });

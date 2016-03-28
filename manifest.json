@@ -7,12 +7,8 @@
 	"default_locale": "ru",
 	
 	"permissions": [
-		"activeTab",
 		"alarms",
-		"tabs",
-		"browsingData",
 		"storage",
-		"contextMenus",
 		"notifications",
 		"http://*/*",
 		"https://*/*"
