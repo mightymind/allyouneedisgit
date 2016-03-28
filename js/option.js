@@ -15,6 +15,8 @@ function saveRepoList(event) {
 		_list[id] = {
 			id : id,
 			url : url,
+			user : url_arr[3],
+			repo : url_arr[4],
 			last_commit : {},
 		};
 	}
@@ -53,7 +55,7 @@ function loadRepoList() {
 						var lc = repo.last_commit;
 						$('.last_commit_list').append(
 							'<p>' +
-								'<b>' + id + '</b>' +
+								'<b>' + repo.user + '/' + repo.repo + '</b>' +
 								'</p><p>' +
 								lc.commit.committer.date +
 								', ' +

@@ -9,8 +9,6 @@ var background_onAlarm = function(alarm) {
 			
 			case 'git_commits':{
 				
-				console.log('git_commits');
-				
 				local.get(function(list) {
 					
 					for(var k in list.repolist) {
@@ -20,8 +18,6 @@ var background_onAlarm = function(alarm) {
 						(function(repo) {
 							
 							if(repo.id != '' && repo.url != '') {
-								
-								//console.log(repo.id);
 								
 								$.getJSON(repo.url, {},
 									function(data){
@@ -54,7 +50,7 @@ var background_onAlarm = function(alarm) {
 											repo.last_commit = last;
 											
 											local.set({repolist : list.repolist}, function(){
-												console.log(list.repolist);
+												
 											});
 											
 									}
