@@ -30,23 +30,32 @@ var background_onAlarm = function(alarm) {
 													
 												} else {
 													
-													Azbn.notify({
-														title : repo.id,
-														preview : last.commit.committer.email + ': ' + last.commit.message,
+													chrome.notifications.create(AzbnExtCfg.id + '@' + last.html_url, {
+														type : 'basic',
+														iconUrl : 'img/logo.png',
+														title : repo.user + repo.repo,
+														message : last.commit.committer.email + ': ' + last.commit.message,
+														isClickable : true,
+													}, function(n_id){
+														
 													});
 													
 												}
 												
 											} else {
 												
-												Azbn.notify({
-													title : repo.id,
-													preview : last.commit.committer.email + ': ' + last.commit.message,
+												chrome.notifications.create(AzbnExtCfg.id + '@' + last.html_url, {
+													type : 'basic',
+													iconUrl : 'img/logo.png',
+													title : repo.user + repo.repo,
+													message : last.commit.committer.email + ': ' + last.commit.message,
+													isClickable : true,
+												}, function(n_id){
+													
 												});
 												
 											}
 											
-											//repo.last_commit = {};
 											repo.last_commit = last;
 											
 											local.set({repolist : list.repolist}, function(){
