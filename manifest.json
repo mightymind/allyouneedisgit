@@ -1,0 +1,36 @@
+{
+	"manifest_version": 2,
+	
+	"name": "__MSG_app_name__",
+	"description": "__MSG_app_description__",
+	"version": "0.0.0.1",
+	"default_locale": "ru",
+	
+	"permissions": [
+		"activeTab",
+		"alarms",
+		"tabs",
+		"browsingData",
+		"storage",
+		"contextMenus",
+		"notifications",
+		"http://*/*",
+		"https://*/*"
+	],
+	
+	"browser_action": {
+		"default_title": "__MSG_browser_action__",
+		"default_icon": "img/logo.png",
+		"default_popup": "html/option.html"
+	},
+	
+	"options_ui": {
+		"page": "html/option.html",
+		"chrome_style": true
+	},
+	
+	"background": {
+		"scripts": ["js/azbn/AzbnExt.js", "js/jquery/jquery.min.js", "js/azbn/AzbnExtCfg.js", "js/background/background_onMessage.js", "js/background/background_onAlarm.js", "js/background/default.js"],
+		"persistent": false
+	}
+}

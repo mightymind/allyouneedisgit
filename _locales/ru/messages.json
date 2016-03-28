@@ -1,0 +1,17 @@
+{
+	"app_name": {
+		"message": "Тестовое расширение Azbn"
+	},
+	"app_description": {
+		"message": "Гоняем расширение для тестов"
+	},
+	"browser_action": {
+		"message": "Какое-то действие при щелчке"
+	},
+	"azbn_test": {
+		"message": "azbn_test"
+	},
+	"azbn_background_init": {
+		"message": "Расширение инициализированно"
+	}
+}
