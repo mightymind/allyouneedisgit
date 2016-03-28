@@ -1,7 +1,7 @@
 var background_onAlarm = function(alarm) {
 	
 	//console.log(alarm);
-	var storage = chrome.storage.local;
+	var local = chrome.storage.local;
 	
 	if(alarm.name != '') {
 		
@@ -11,24 +11,22 @@ var background_onAlarm = function(alarm) {
 				
 				console.log('git_commits');
 				
-				storage.get(null, function(list) {
+				local.get(function(list) {
 					
 					for(var k in list.repolist) {
 						
-						var repo = list.repolist[k];
+						var repo = list.repolist[k] || {};
 						
 						if(repo.id != '' && repo.url != '') {
 							
+							//console.log(repo.id);
+							
 							$.getJSON(repo.url, {},
 								function(data){
-									
-									console.log(data);
-									
-									if(data.length > 0) {
-										var last = data[0];
-										var need = true;
 										
-										if(repo.last_commit.sha) {
+										var last = data[0];
+										
+										if(typeof repo.last_commit.sha == 'string') {
 											
 											if(last.sha.indexOf(repo.last_commit.sha) > -1) {
 												
@@ -50,15 +48,18 @@ var background_onAlarm = function(alarm) {
 											
 										}
 										
+										//repo.last_commit = {};
 										repo.last_commit = last;
 										
-										storage.set({repolist : list.repolist});
+										local.set({repolist : list.repolist}, function(){
+											console.log(list.repolist);
+										});
 										
-									}
 								}
 							);
 							
 						}
+						
 					}
 					
 				});

@@ -10,6 +10,7 @@
 		"alarms",
 		"storage",
 		"notifications",
+		"unlimitedStorage",
 		"http://*/*",
 		"https://*/*"
 	],
