@@ -34,6 +34,8 @@ function loadRepoList() {
 	var f = $('form');
 	var ta = f.find('textarea[name="repolist"]');
 	
+	$('form input[type="submit"]').val(chrome.i18n.getMessage('ui_save_btn'));
+	
 	storage.get(null, function(list) {
 		//ta.val(JSON.stringify(list.repolist));
 		

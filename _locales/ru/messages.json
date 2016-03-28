@@ -13,5 +13,8 @@
 	},
 	"ui_save_notify": {
 		"message": "Настройки сохранены"
+	},
+	"ui_save_btn": {
+		"message": "Сохранить список"
 	}
 }
