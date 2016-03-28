@@ -29,32 +29,36 @@ function loadRepoList() {
 	
 	storage.get(null, function(list) {
 		//ta.val(JSON.stringify(list.repolist));
+		
+		$('.last_commit_list').empty();
+		
 		if(typeof list.repolist == 'object') {
 			
 			var _arr = [];
 			
-			$('.last_commit_list').empty();
-			
 			for(var k in list.repolist) {
 				
-				var id = list.repolist[k].id;
+				var repo = list.repolist[k];
+				var id = repo.id;
 				_arr.push(id);
 				
-				if(typeof list.repolist[k].last_commit == 'object') {
-					
-					var lc = list.repolist[k].last_commit;
-					$('.last_commit_list').append(
-						'<p>' +
-							'<b>' + id + '</b>' +
-							'</p><p>' +
-							lc.commit.committer.date +
-							', ' +
-							lc.commit.committer.email +
-							'</p><p>' +
-							lc.commit.message +
-						'</p>'
-						);
-					
+				if(repo.last_commit.sha) {
+					if(typeof repo.last_commit.sha == 'string') {
+						
+						var lc = repo.last_commit;
+						$('.last_commit_list').append(
+							'<p>' +
+								'<b>' + id + '</b>' +
+								'</p><p>' +
+								lc.commit.committer.date +
+								', ' +
+								lc.commit.committer.email +
+								'</p><p>' +
+								lc.commit.message +
+							'</p>'
+							);
+						
+					}
 				}
 				
 			}

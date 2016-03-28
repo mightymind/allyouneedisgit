@@ -17,7 +17,7 @@ var background_onAlarm = function(alarm) {
 						
 						var repo = list.repolist[k];
 						
-						if(repo.id && repo.id != '' && repo.url != '') {
+						if(repo.id != '' && repo.url != '') {
 							
 							$.getJSON(repo.url, {},
 								function(data){
@@ -39,9 +39,6 @@ var background_onAlarm = function(alarm) {
 													preview : last.commit.committer.email + ': ' + last.commit.message,
 												});
 												
-												repo.last_commit = last;
-												
-												storage.set({repolist : list.repolist});
 											}
 											
 										} else {
@@ -51,11 +48,11 @@ var background_onAlarm = function(alarm) {
 												preview : last.commit.committer.email + ': ' + last.commit.message,
 											});
 											
-											repo.last_commit = last;
-											
-											storage.set({repolist : list.repolist});
-											
 										}
+										
+										repo.last_commit = last;
+										
+										storage.set({repolist : list.repolist});
 										
 									}
 								}
