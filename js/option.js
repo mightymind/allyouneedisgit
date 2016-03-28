@@ -18,7 +18,12 @@ function saveRepoList(event) {
 			last_commit : {},
 		};
 	}
-	storage.set({'repolist' : _list});
+	storage.set({'repolist' : _list}, function(){
+		$('.save-notify').html(chrome.i18n.getMessage('ui_save_notify'));
+		setTimeout(function(){
+			$('.save-notify').html('');
+		},3000);
+	});
 }
 
 function loadRepoList() {

@@ -10,5 +10,8 @@
 	},
 	"azbn_background_init": {
 		"message": "Расширение инициализированно"
+	},
+	"ui_save_notify": {
+		"message": "Настройки сохранены"
 	}
 }

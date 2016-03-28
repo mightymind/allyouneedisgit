@@ -15,20 +15,31 @@ var background_onAlarm = function(alarm) {
 					
 					for(var k in list.repolist) {
 						
-						var repo = list.repolist[k] || {};
+						var r = list.repolist[k] || {};
 						
-						if(repo.id != '' && repo.url != '') {
+						(function(repo) {
 							
-							//console.log(repo.id);
-							
-							$.getJSON(repo.url, {},
-								function(data){
-										
-										var last = data[0];
-										
-										if(typeof repo.last_commit.sha == 'string') {
+							if(repo.id != '' && repo.url != '') {
+								
+								//console.log(repo.id);
+								
+								$.getJSON(repo.url, {},
+									function(data){
 											
-											if(last.sha.indexOf(repo.last_commit.sha) > -1) {
+											var last = data[0];
+											
+											if(typeof repo.last_commit.sha == 'string') {
+												
+												if(last.sha.indexOf(repo.last_commit.sha) > -1) {
+													
+												} else {
+													
+													Azbn.notify({
+														title : repo.id,
+														preview : last.commit.committer.email + ': ' + last.commit.message,
+													});
+													
+												}
 												
 											} else {
 												
@@ -39,26 +50,19 @@ var background_onAlarm = function(alarm) {
 												
 											}
 											
-										} else {
+											//repo.last_commit = {};
+											repo.last_commit = last;
 											
-											Azbn.notify({
-												title : repo.id,
-												preview : last.commit.committer.email + ': ' + last.commit.message,
+											local.set({repolist : list.repolist}, function(){
+												console.log(list.repolist);
 											});
 											
-										}
-										
-										//repo.last_commit = {};
-										repo.last_commit = last;
-										
-										local.set({repolist : list.repolist}, function(){
-											console.log(list.repolist);
-										});
-										
-								}
-							);
+									}
+								);
+								
+							}
 							
-						}
+						})(r);
 						
 					}
 					
