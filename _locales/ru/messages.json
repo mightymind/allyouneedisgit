@@ -22,5 +22,14 @@
 	},
 	"ui_repoadr_list": {
 		"message": "Адреса репозиториев GitHub (по одному на строчку)"
+	},
+	"ui_fixedmenu_commit_btn": {
+		"message": "Коммиты"
+	},
+	"ui_fixedmenu_repo_btn": {
+		"message": "Репозитории"
+	},
+	"ui_fixedmenu_about_btn": {
+		"message": "О расширении"
 	}
 }

@@ -41,6 +41,7 @@ function saveRepoList(event) {
 }
 
 var updateLinkHref = function () {
+	/*
 	var links = document.getElementsByTagName("a");
 	for (var i = 0; i < links.length; i++) {
 		(function () {
@@ -51,6 +52,21 @@ var updateLinkHref = function () {
 			};
 		})();
 	}
+	*/
+	$('a').each(function(index){
+		
+		var btn = $(this);
+		if(!btn.parent().hasClass('menu-item')) {
+			var location = btn.attr('href');
+			btn.unbind('click.fecss');
+			btn.on('click.fecss', function(event){
+				event.preventDefault();
+				
+				chrome.tabs.create({active: true, url: location});
+			})
+		}
+		
+	});
 }
 
 document.addEventListener('DOMContentLoaded', updateLinkHref);
@@ -89,12 +105,12 @@ function loadRepoList() {
 						var lc = repo.last_commit;
 						$('.last_commit_list').append(
 							'<div class="item" >' +
-								'<div class="title" ><a class="repo-link" href="' + repo.id + '" >' + repo.user + ' / ' + repo.repo + '</a></div>' +
+								'<div class="title" ><i class="demo-icon icon-github-circled">&#xe801;</i> <a class="repo-link" href="' + repo.id + '" >' + repo.user + ' / ' + repo.repo + '</a></div>' +
 								'<div class="message" >' +
 									'<div class="date" ><i class="demo-icon icon-wristwatch">&#xe800;</i> ' + lc.commit.committer.date + ', ' + lc.commit.committer.email + '</div>' +
 									'<div class="text" >' + lc.commit.message + '</div>' +
 								'</div>' +
-								'<div class="last-commit" ><i class="demo-icon icon-github-circled">&#xe801;</i> <a class="last-commit-link" href="' + lc.html_url + '" >' + chrome.i18n.getMessage('ui_last_commit') + ' <span class="r-arr" >&rarr;</span></a></div>' +
+								'<div class="last-commit" ><a class="last-commit-link" href="' + lc.html_url + '" >' + chrome.i18n.getMessage('ui_last_commit') + ' <span class="r-arr" >&rarr;</span></a></div>' +
 							'</div>'
 							);
 						
@@ -116,9 +132,32 @@ function loadRepoList() {
 	});
 }
 
+function loadFixedMenuBtns() {
+	
+	var menu = $('.fixed-menu');
+	
+	$(document.body).on('click.fecss', '.fixed-menu .menu-item a', {}, function(event){
+		event.preventDefault();
+		
+		var btn = $(this);
+		var href = btn.attr('href');
+		
+		$('.action-block').fadeOut('fast');
+		$(href + '.action-block').fadeIn('fast');
+		
+		menu.find('.menu-item.active').removeClass('active');
+		btn.closest('.menu-item').addClass('active');
+		
+	});
+	
+	menu.find('.menu-item').eq(0).find('a').trigger('click.fecss');
+	
+}
+
 $(document).ready(function(){
 	
 	loadRepoList();
+	loadFixedMenuBtns();
 	
 	$(document.body).on('submit', 'form', {}, saveRepoList);
 	
