@@ -1,5 +1,17 @@
 var storage = chrome.storage.local;
 
+function i18n() {
+	var els = $('[data-i18n-id]');
+	if(els.size()) {
+		els.each(function(index){
+			var el = $(this);
+			var i18n_id = el.attr('data-i18n-id');
+			el.html(chrome.i18n.getMessage(i18n_id));
+			el.val(chrome.i18n.getMessage(i18n_id));
+		})
+	}
+}
+
 function saveRepoList(event) {
 	event.preventDefault();
 	
@@ -49,18 +61,23 @@ function loadRepoList() {
 	var f = $('form');
 	var ta = f.find('textarea[name="repolist"]');
 	
-	$('form input[type="submit"]').val(chrome.i18n.getMessage('ui_save_btn'));
+	//$('form input[type="submit"]').val(chrome.i18n.getMessage('ui_save_btn'));
+	
+	i18n();
 	
 	storage.get(null, function(list) {
 		//ta.val(JSON.stringify(list.repolist));
 		
-		$('.last_commit_list').empty();
+		$('.last_commit_list').empty().hide();
 		
 		if(typeof list.repolist == 'object') {
 			
 			var _arr = [];
+			var _i = 0;
 			
 			for(var k in list.repolist) {
+				
+				_i++;
 				
 				var repo = list.repolist[k];
 				var id = repo.id;
@@ -84,6 +101,12 @@ function loadRepoList() {
 					}
 				}
 				
+			}
+			
+			if(_i) {
+				$('.last_commit_list').fadeIn('fast');
+			} else {
+				$('.last_commit_list').fadeOut('fast');
 			}
 			
 			ta.val(_arr.join("\n"));

@@ -19,5 +19,8 @@
 	},
 	"ui_last_commit": {
 		"message": "Перейти к коммиту"
+	},
+	"ui_repoadr_list": {
+		"message": "Адреса репозиториев GitHub (по одному на строчку)"
 	}
 }
