@@ -21,9 +21,9 @@ function saveRepoList(event) {
 		};
 	}
 	storage.set({'repolist' : _list}, function(){
-		$('.save-notify').html(chrome.i18n.getMessage('ui_save_notify'));
+		$('.save-notify').html(chrome.i18n.getMessage('ui_save_notify')).addClass('active');
 		setTimeout(function(){
-			$('.save-notify').html('');
+			$('.save-notify').html('').removeClass('active');
 		},3000);
 	});
 }
@@ -71,15 +71,14 @@ function loadRepoList() {
 						
 						var lc = repo.last_commit;
 						$('.last_commit_list').append(
-							'<p>' +
-								'<b>' + repo.user + '/' + repo.repo + '</b>' +
-								'</p><p><a href="' + lc.html_url + '"' +
-								lc.commit.committer.date +
-								', ' +
-								lc.commit.committer.email +
-								'</p><p>' +
-								lc.commit.message +
-							'</p>'
+							'<div class="item" >' +
+								'<div class="title" ><a class="repo-link" href="' + repo.id + '" >' + repo.user + ' / ' + repo.repo + '</a></div>' +
+								'<div class="message" >' +
+									'<div class="date" ><i class="demo-icon icon-wristwatch">&#xe800;</i> ' + lc.commit.committer.date + ', ' + lc.commit.committer.email + '</div>' +
+									'<div class="text" >' + lc.commit.message + '</div>' +
+								'</div>' +
+								'<div class="last-commit" ><i class="demo-icon icon-github-circled">&#xe801;</i> <a class="last-commit-link" href="' + lc.html_url + '" >' + chrome.i18n.getMessage('ui_last_commit') + ' <span class="r-arr" >&rarr;</span></a></div>' +
+							'</div>'
 							);
 						
 					}

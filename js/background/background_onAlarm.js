@@ -33,7 +33,7 @@ var background_onAlarm = function(alarm) {
 													chrome.notifications.create(AzbnExtCfg.id + '@' + last.html_url, {
 														type : 'basic',
 														iconUrl : 'img/logo.png',
-														title : repo.user + repo.repo,
+														title : repo.user + '/' + repo.repo,
 														message : last.commit.committer.email + ': ' + last.commit.message,
 														isClickable : true,
 													}, function(n_id){
@@ -47,7 +47,7 @@ var background_onAlarm = function(alarm) {
 												chrome.notifications.create(AzbnExtCfg.id + '@' + last.html_url, {
 													type : 'basic',
 													iconUrl : 'img/logo.png',
-													title : repo.user + repo.repo,
+													title : repo.user + '/' + repo.repo,
 													message : last.commit.committer.email + ': ' + last.commit.message,
 													isClickable : true,
 												}, function(n_id){

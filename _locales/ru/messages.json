@@ -16,5 +16,8 @@
 	},
 	"ui_save_btn": {
 		"message": "Сохранить список"
+	},
+	"ui_last_commit": {
+		"message": "Перейти к коммиту"
 	}
 }
