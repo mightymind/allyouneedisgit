@@ -84,7 +84,7 @@ function loadRepoList() {
 	storage.get(null, function(list) {
 		//ta.val(JSON.stringify(list.repolist));
 		
-		$('.last_commit_list').empty().hide();
+		$('.last_commit_list').empty();//.hide();
 		
 		if(typeof list.repolist == 'object') {
 			
@@ -93,8 +93,6 @@ function loadRepoList() {
 			
 			for(var k in list.repolist) {
 				
-				_i++;
-				
 				var repo = list.repolist[k];
 				var id = repo.id;
 				_arr.push(id);
@@ -102,12 +100,16 @@ function loadRepoList() {
 				if(repo.last_commit.sha) {
 					if(typeof repo.last_commit.sha == 'string') {
 						
+						_i++;
+						
 						var lc = repo.last_commit;
+						var lu = new Date(repo.last_update);
+						
 						$('.last_commit_list').append(
 							'<div class="item" >' +
 								'<div class="title" ><i class="demo-icon icon-github-circled">&#xe801;</i> <a class="repo-link" href="' + repo.id + '" >' + repo.user + ' / ' + repo.repo + '</a></div>' +
 								'<div class="message" >' +
-									'<div class="date" ><i class="demo-icon icon-wristwatch">&#xe800;</i> ' + lc.commit.committer.date + ', ' + lc.commit.committer.email + '</div>' +
+									'<div class="date" ><i class="demo-icon icon-wristwatch">&#xe800;</i> ' + lu.toLocaleString() + ', ' + lc.commit.committer.email + '</div>' +
 									'<div class="text" >' + lc.commit.message + '</div>' +
 								'</div>' +
 								'<div class="last-commit" ><a class="last-commit-link" href="' + lc.html_url + '" >' + chrome.i18n.getMessage('ui_last_commit') + ' <span class="r-arr" >&rarr;</span></a></div>' +
@@ -120,14 +122,19 @@ function loadRepoList() {
 			}
 			
 			if(_i) {
-				$('.last_commit_list').fadeIn('fast');
+				$('#commits-overflow-container').fadeIn('fast');
+				$('.scroll-container[data-target="#commits-overflow-container"]').fadeIn('fast');
 			} else {
-				$('.last_commit_list').fadeOut('fast');
+				$('#commits-overflow-container').hide();
+				$('.scroll-container[data-target="#commits-overflow-container"]').hide();
 			}
 			
 			ta.val(_arr.join("\n"));
 			
 			updateLinkHref();
+			
+			$('.scroll-container').trigger('init');
+			
 		}
 	});
 }
@@ -142,11 +149,13 @@ function loadFixedMenuBtns() {
 		var btn = $(this);
 		var href = btn.attr('href');
 		
-		$('.action-block').fadeOut('fast');
+		$('.action-block').hide();
 		$(href + '.action-block').fadeIn('fast');
 		
 		menu.find('.menu-item.active').removeClass('active');
 		btn.closest('.menu-item').addClass('active');
+		
+		$('.scroll-container').trigger('init');
 		
 	});
 	
@@ -154,8 +163,21 @@ function loadFixedMenuBtns() {
 	
 }
 
+function loadAboutText() {
+	
+	var src = chrome.i18n.getMessage('ui_about_text_src');
+	
+	$.get(src, {}, function(data){
+		$('#about-text').html(data);
+		
+		//updateLinkHref();
+	});
+	
+}
+
 $(document).ready(function(){
 	
+	loadAboutText();
 	loadRepoList();
 	loadFixedMenuBtns();
 	

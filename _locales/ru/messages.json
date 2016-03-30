@@ -31,5 +31,8 @@
 	},
 	"ui_fixedmenu_about_btn": {
 		"message": "О расширении"
+	},
+	"ui_about_text_src": {
+		"message": "/html/about/ru.html"
 	}
 }

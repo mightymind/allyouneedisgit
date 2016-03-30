@@ -20,10 +20,8 @@
 <script src="../js/device.min.js" ></script>
 
 <script type="text/javascript" src="../js/jquery/jquery.min.js" ></script>
+<script type="text/javascript" src="../js/document-ready.js" ></script>
 <script type="text/javascript" src="../js/option.js"></script>
-
-<!--<script src="../js/document-ready.js" ></script>-->
-
 
 </head>
 <body class="fecss full-height theme-green0w " >
@@ -37,10 +35,10 @@
 						<a href="#ab-commits" data-i18n-id="ui_fixedmenu_commit_btn" ></a>
 					</div>
 					<div class="clmn-12 clmn-xs-4 clmn-sm-4 clmn-md-4 clmn-lg-4 menu-item" >
-						<a href="#ab-repos" data-i18n-id="ui_fixedmenu_repo_btn" >Репозитории</a>
+						<a href="#ab-repos" data-i18n-id="ui_fixedmenu_repo_btn" ></a>
 					</div>
 					<div class="clmn-12 clmn-xs-4 clmn-sm-4 clmn-md-4 clmn-lg-4 menu-item" >
-						<a href="#ab-about" data-i18n-id="ui_fixedmenu_about_btn" >О расширении</a>
+						<a href="#ab-about" data-i18n-id="ui_fixedmenu_about_btn" ></a>
 					</div>
 					
 					<div class="clear" ></div>
@@ -56,9 +54,23 @@
 			<div class="adaptive-block grid grid-12 " >
 				<div class="grid-row" >
 					
-					<div class="clmn-12 clmn-xs-12 clmn-sm-12 clmn-md-12 clmn-lg-12 commit-list last_commit_list action-block" id="ab-commits" >
+					<div class="clmn-12 clmn-xs-12 clmn-sm-12 clmn-md-12 clmn-lg-12 action-block" id="ab-commits" >
 						
+						<div id="commits-overflow-container" class="scroll-hide" >
+							<div class="overflow-container scroll-element"  style="" >
+								<div class="overflowed scroll-overflow commit-list last_commit_list " >
+									
+									
+									
+								</div>
+							</div>
+						</div>
 						
+						<div class="scroll-container vertical right" data-target="#commits-overflow-container" >
+							<div class="scroll-line" >
+								<div class="scroll " ></div>
+							</div>
+						</div>
 						
 					</div>
 					
@@ -68,22 +80,33 @@
 							
 							<div class="input-block ">
 								<label data-i18n-id="ui_repoadr_list" ></label>
-								<textarea name="repolist" rows="5" ></textarea>
+								<textarea name="repolist" ></textarea>
 							</div>
 							
-							<div class="input-block ">
-								<input type="submit" value="Сохранить" data-i18n-id="ui_save_btn" />
+							<div class="input-block align-right">
 								<span class="save-notify " data-i18n-id="ui_save_notify" ></span>
+								<input type="submit" value="Сохранить" data-i18n-id="ui_save_btn" />
 							</div>
 							
 						</form>
 						
 					</div>
 					
-					<div class="clmn-12 clmn-xs-12 clmn-sm-12 clmn-md-12 clmn-lg-12 action-block" id="ab-about" >
+					<div class="clmn-12 clmn-xs-12 clmn-sm-12 clmn-md-12 clmn-lg-12 action-block " id="ab-about" >
 						
-						<p>Расширение написано для облегчения процесса командной веб-разработки</p>
-						<p>E-mail автора: <a href="mailto:alexander.zybin@gmail.com" >alexander.zybin@gmail.com</a></p>
+						<div id="about-overflow-container" class="scroll-hide" >
+							<div class="overflow-container scroll-element"  style="" >
+								<div class="overflowed scroll-overflow sandbox style-green0w " id="about-text" ></div>
+							</div>
+						</div>
+						
+						<div class="scroll-container vertical right" data-target="#about-overflow-container" >
+							<div class="scroll-line" >
+								<div class="scroll " ></div>
+							</div>
+						</div>
+						
+						
 						
 					</div>
 					

@@ -1,0 +1,38 @@
+{
+	"app_name": {
+		"message": "All You Need Is Git"
+	},
+	"app_description": {
+		"message": "Notification of new commits in the repository GitHub"
+	},
+	"browser_action": {
+		"message": ""
+	},
+	"azbn_background_init": {
+		"message": "Extension initialized"
+	},
+	"ui_save_notify": {
+		"message": "Saved"
+	},
+	"ui_save_btn": {
+		"message": "Save list"
+	},
+	"ui_last_commit": {
+		"message": "Go to commit"
+	},
+	"ui_repoadr_list": {
+		"message": "Repositories on GitHub (one per row)"
+	},
+	"ui_fixedmenu_commit_btn": {
+		"message": "Commits"
+	},
+	"ui_fixedmenu_repo_btn": {
+		"message": "Repositories"
+	},
+	"ui_fixedmenu_about_btn": {
+		"message": "About"
+	},
+	"ui_about_text_src": {
+		"message": "/html/about/en.html"
+	}
+}

@@ -63,6 +63,7 @@ var background_onAlarm = function(alarm) {
 												}
 												
 												repo.last_commit = last;
+												repo.last_update = Azbn.now();
 												
 												local.set({repolist : list.repolist}, function(){
 													
